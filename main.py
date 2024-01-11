@@ -94,4 +94,6 @@ result_label.pack()
 # hide radio buttons
 center_frame.pack_forget()
 question_label.config(text="What is the capital of France?")
-root.mainloop()
+
+if __name__ == "__main__":
+    root.mainloop()
