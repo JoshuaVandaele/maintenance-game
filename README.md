@@ -1,5 +1,14 @@
 # Quiz Game
 
+## Table of Contents
+
+- [Quiz Game](#quiz-game)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Authors](#authors)
+
 ## Description
 
 This is a quiz game that will ask the user a series of questions and keep track of their score. The user will be able to choose from a list of categories and the questions will be based on the category they choose. The user will be able to see their score at the end of the game.
