@@ -10,6 +10,8 @@ WINDOW_HEIGHT = 500
 root = tk.Tk()
 root.title("Quiz Game")
 
+# FIXME: The size of the window should be defined in a more flexible way.
+#        For example, it should be able to adapt to the size of the screen.
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 root.resizable(False, False)
 
@@ -26,6 +28,7 @@ entry.place(x=WINDOW_WIDTH / 2 - 150, y=WINDOW_HEIGHT / 2 - 20)
 
 centered_radio_buttons_frame = tk.Frame(root)
 centered_radio_buttons_frame.config(width=50)
+# FIXME: The position of the entry should be defined in a more flexible way.
 centered_radio_buttons_frame.place(x=WINDOW_WIDTH / 2 - 100, y=WINDOW_HEIGHT / 2 - 20)
 
 selected_option = tk.StringVar()
@@ -59,6 +62,7 @@ def switch_mode():
     """This function is called when the quiz needs to change between QCM and entry mode."""
     # FIXME: Globals should be avoided. Instead, you should pass the variables as arguments to the function, or use a class.
     global mode
+    # FIXME: To hide a widget, you shouldn't move it outside of the window.
     if mode == "qcm":
         mode = "entry"
         entry.place(x=500, y=500)
@@ -106,6 +110,8 @@ def submit_handler():
     else:
         result_label.config(text="Wrong!")
 
+    # FIXME: Questions and answers should be stored in a list or a dictionary, so that you can easily add new questions.
+    # FIXME: The logic of the game should be separated from the interface.
     if q == 1:
         mode = "qcm"
         question_label.config(text="What is the capital of Germany?")
@@ -120,7 +126,7 @@ def submit_handler():
     switch_mode()
 
 
-# hide radio buttons
+# FIXME: This should not be here. It should be moved to a separate file, and instantiated in a class.
 question_label.config(text="What is the capital of France?")
 mode = "entry"
 switch_mode()
