@@ -77,7 +77,7 @@ def submit_handler():
     if "q" not in globals():
         q = 0
     # FIXME: The logic of the game should be separated from the interface.
-    answer = entry.get() if q != 1 else selected_option
+    answer = entry.get() if q != 1 else selected_option.get()
     if check_answer(answer):
         result_label.config(text="Correct!")
         q += 1
