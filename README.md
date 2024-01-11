@@ -5,13 +5,25 @@
 - [Quiz Game](#quiz-game)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
+  - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Authors](#authors)
 
 ## Description
 
-This is a quiz game that will ask the user a series of questions and keep track of their score. The user will be able to choose from a list of categories and the questions will be based on the category they choose. The user will be able to see their score at the end of the game.
+
+Quiz game is a fun and entertaining quizz game that will make you discover new realms of fun !! The user (you) will get asked a series of questions (either MCQ or free answer questions) and keep track of your score on the scoreboard. You will be able to choose from a list of categories and the questions will be based on it. You will be able to see your score at the end of the game.
+
+## Features
+
+-Timer
+-Question themes
+-MCQ (Multiple choices questions)
+-Free answer questions (case-unsensitive)
+-Scoreboard
+-API
+-Questions stored in json
 
 ## Installation
 
