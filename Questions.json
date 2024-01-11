@@ -1,0 +1,11 @@
+[
+    {
+        "question": "What is the capital of France?",
+        "answer": "Paris"
+    },
+    {
+        "question": "What is the capital of Germany?",
+        "answer": "Berlin",
+        "trap": ["Paris", "London", "Madrid"]
+    }
+]
