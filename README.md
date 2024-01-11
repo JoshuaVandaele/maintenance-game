@@ -5,6 +5,7 @@
 - [Quiz Game](#quiz-game)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
+  - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Authors](#authors)
@@ -14,7 +15,7 @@
 
 Quiz game is a fun and entertaining quizz game that will make you discover new realms of fun !! The user (you) will get asked a series of questions (either MCQ or free answer questions) and keep track of your score on the scoreboard. You will be able to choose from a list of categories and the questions will be based on it. You will be able to see your score at the end of the game.
 
-##Features
+## Features
 
 -Timer
 -Question themes
