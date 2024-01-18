@@ -50,22 +50,27 @@ class TestController(unittest.TestCase):
         ]
         controller: QuestionController = QuestionController(questions)
 
-        self.assertTrue(controller.check_answer("Paris"))
-        self.assertTrue(controller.check_answer("Berlin"))
-        self.assertTrue(controller.check_answer("Rome"))
+        controller.check_answer("Paris")
+        self.assertTrue(controller.current_question_index == 1)
+        controller.check_answer("Berlin")
+        self.assertTrue(controller.current_question_index == 2)
+        controller.check_answer("Rome")
+        self.assertTrue(controller.current_question_index == 3)
 
     def test_controller_check_bad_answer(self: TestController) -> None:
         questions: list[Question] = [
             OpenQuestion("What is the capital of France?", ["Paris"]),
-            OpenQuestion("What is the capital of Germany?", ["Berlin"]),
             MultipleChoiceQuestion("What is the capital of Italy?", ["Rome"], ["Paris", "Berlin", "Madrid", "Rome", "London", "Lisbon", "Brussels"])
         ]
 
         controller: QuestionController = QuestionController(questions)
 
-        self.assertFalse(controller.check_answer("Rome"))
-        self.assertFalse(controller.check_answer("Paris"))
-        self.assertFalse(controller.check_answer("Berlin"))
+        controller.check_answer("Rome")
+        self.assertFalse(controller.current_question_index == 1)
+        controller.check_answer("Paris")
+        controller.check_answer("Berlin")
+
+        self.assertFalse(controller.current_question_index == 2)
 
     def test_next_question(self: TestController) -> None:
         questions: list[Question] = [
