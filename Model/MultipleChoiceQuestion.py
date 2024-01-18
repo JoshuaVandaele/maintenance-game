@@ -2,19 +2,20 @@
 
 from __future__ import annotations
 
-# <========== Local Imports ==========>
-
 from Model.Question import Question
 
 # <========== Class ==========>
 
+
 class MultipleChoiceQuestion(Question):
-    """ Class representing a multiple choice question.
+    """Class representing a multiple choice question.
     Derived from abstract class Question.
     """
 
-    def __init__(self: MultipleChoiceQuestion, text: str, answer: list[str],  trap: list[str]) -> None:
-        """ Constructor for OpenQuestion class
+    def __init__(
+        self: MultipleChoiceQuestion, text: str, answer: list[str], trap: list[str]
+    ) -> None:
+        """Constructor for OpenQuestion class
 
         Args:
             self (MultipleChoiceQuestion): Self.
@@ -26,7 +27,7 @@ class MultipleChoiceQuestion(Question):
         self.trap: list[str] = trap
 
     def check_answer(self: MultipleChoiceQuestion, answer: list[str]) -> bool:
-        """ Checks if the answer is correct.
+        """Checks if the answer is correct.
         When answer is multiple choice, all choices must be correct.
 
         Args:
@@ -35,4 +36,6 @@ class MultipleChoiceQuestion(Question):
         Returns:
             bool: True if the answer is correct, if answer have multiple choices, all choices must be correct. False otherwise.
         """
+        if isinstance(answer, str):
+            return answer in self.answer
         return all(choice in self.answer for choice in answer)
