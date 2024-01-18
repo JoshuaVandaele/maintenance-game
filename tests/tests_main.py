@@ -101,8 +101,6 @@ class TestController(unittest.TestCase):
         controller.next_question()
         self.assertFalse(controller.it_is_end())
         controller.next_question()
-        self.assertFalse(controller.it_is_end())
-        controller.next_question()
         self.assertTrue(controller.it_is_end())
 
         controller = QuestionController(questions)
