@@ -30,4 +30,4 @@ jobs:
           Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
       - name: Test with unittest
         run: |
-          python -m unittest
+          xvfb-run --auto-servernum --server-num=1 python -m unittest
