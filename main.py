@@ -19,20 +19,23 @@ center_frame.pack()
 
 selected_option = tk.StringVar()
 
+answer = ""
+trap = ["","",""]
+
 # FIXME: The radio buttons should be generated dynamically from the questions list.
-radio_button = tk.Radiobutton(root, text="A", variable=selected_option, value="0")
+radio_button = tk.Radiobutton(root, text=answer, variable=selected_option, value=answer)
 radio_button.pack(anchor=tk.W)
 radio_button.pack(in_=center_frame, side=tk.LEFT, padx=10)
 
-radio_button = tk.Radiobutton(root, text="B", variable=selected_option, value="1")
+radio_button = tk.Radiobutton(root, text=trap[0], variable=selected_option, value=trap[0])
 radio_button.pack(anchor=tk.W)
 radio_button.pack(in_=center_frame, side=tk.LEFT, padx=10)
 
-radio_button = tk.Radiobutton(root, text="C", variable=selected_option, value="2")
+radio_button = tk.Radiobutton(root, text=trap[1], variable=selected_option, value=trap[1])
 radio_button.pack(anchor=tk.W)
 radio_button.pack(in_=center_frame, side=tk.LEFT, padx=10)
 
-radio_button = tk.Radiobutton(root, text="D", variable=selected_option, value="3")
+radio_button = tk.Radiobutton(root, text=trap[2], variable=selected_option, value=trap[2])
 radio_button.pack(anchor=tk.W)
 radio_button.pack(in_=center_frame, side=tk.LEFT, padx=10)
 
