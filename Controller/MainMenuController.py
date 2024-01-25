@@ -1,11 +1,14 @@
+"""The main menu controller file for the program."""
 # <========== Imports ==========>
 
 from __future__ import annotations
+
 import os
 from pathlib import Path
 from tkinter import Frame, PhotoImage, TclError, Tk
 
-# <========== Local Imports ==========>
+# Controller Imports
+from Controller.QuestionController import QuestionController
 
 # Model Imports
 from Model.Question import Question
@@ -13,15 +16,17 @@ from Model.Question import Question
 # View Imports
 from View.WelcomePage import WelcomePage
 
-# Controller Imports
-from Controller.QuestionController import QuestionController
+# <========== Local Imports ==========>
+
 
 # <========== Class ==========>
 
+
 class MainMenuController:
+    """Controller using to manage the main menu."""
 
     def __init__(self: MainMenuController, questions: list[Question]) -> None:
-        """ The constructor for MainMenuController class.
+        """The constructor for MainMenuController class.
         Create a view for the main menu.
 
         Args:
@@ -33,6 +38,7 @@ class MainMenuController:
         self.root: Tk = Tk()
         self.root.title("Quiz Game")
         self.root.geometry("600x350")
+        self.root.configure(background="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")
             self.root.iconphoto(False, PhotoImage(file=abs_path))
@@ -41,8 +47,10 @@ class MainMenuController:
         self.views: Frame = WelcomePage(self.start, self.quit)
         self.views.pack()
 
+        self.root.resizable(False, False)
+
     def start(self: MainMenuController) -> QuestionController:
-        """ Start the main menu.
+        """Start the main menu.
 
         Args:
             self (MainMenuController): Self.
@@ -51,7 +59,7 @@ class MainMenuController:
         return QuestionController(self.questions)
 
     def quit(self: MainMenuController) -> None:
-        """ Quit the game.
+        """Quit the game.
 
         Args:
             self (MainMenuController): Self.

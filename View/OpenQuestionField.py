@@ -1,10 +1,14 @@
+"""Open Question Field Module"""
+
 # <========== Imports ==========>
 
 from __future__ import annotations
-from tkinter import Label, Entry, Button, Frame
+
+from tkinter import Button, Entry, Frame, Label
 from typing import Callable
 
 # <========== Class ==========>
+
 
 class OpenQuestionField(Frame):
     """ Class representing a frame displaying an open question,
@@ -36,7 +40,7 @@ class OpenQuestionField(Frame):
         self.submit_button.pack(pady=15)
 
     def submit(self: OpenQuestionField) -> None:
-        """ What to do when submit button is pressed.
+        """What to do when submit button is pressed.
 
         Args:
             self (OpenQuestionField): Self.

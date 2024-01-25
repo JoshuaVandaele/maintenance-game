@@ -8,6 +8,7 @@
   - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Documentation](#documentation)
   - [Authors](#authors)
 
 ## Description
@@ -39,6 +40,10 @@ To run the project, you will need to activate the virtual environment and run th
 source venv/bin/activate
 python3 main.py
 ```
+
+## Documentation
+
+The documentation is available at https://JoshuaVandaele.github.io/maintenance-game/
 
 ## Authors
 
