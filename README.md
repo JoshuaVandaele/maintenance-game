@@ -12,18 +12,12 @@
 
 ## Description
 
-
-Quiz game is a fun and entertaining quizz game that will make you discover new realms of fun !! The user (you) will get asked a series of questions (either MCQ or free answer questions) and keep track of your score on the scoreboard. You will be able to choose from a list of categories and the questions will be based on it. You will be able to see your score at the end of the game.
+Quiz game is a fun and entertaining quiz game that will make you discover new realms of fun!! The user (you) will get asked a series of questions (either MCQ or free answer questions) and keep track of your score.
 
 ## Features
 
-- Timer
-- Question themes
-- MCQ (Multiple choices questions)
-- Free answer questions (case-unsensitive)
-- Scoreboard
-- API
-- Questions stored in json
+- A huge question database powered by [OpenTDB](https://opentdb.com) (Over 4000 unique questions!)
+- A scoring system to see how you are improving!
 
 ## Installation
 
