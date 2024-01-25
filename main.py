@@ -7,6 +7,7 @@ import tkinter as tk
 from Model.OpenQuestion import OpenQuestion
 from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
 from Controller.QuestionController import QuestionController
+from Controller.MainMenuController import MainMenuController
 
 # <========== Main ==========>
 
@@ -19,6 +20,5 @@ if __name__ == "__main__":
     ]
 
     # Create a QuestionController
-    question_controller = QuestionController(questions)
-
-    question_controller.root.mainloop()
+    controller = MainMenuController(questions)
+    controller.root.mainloop()

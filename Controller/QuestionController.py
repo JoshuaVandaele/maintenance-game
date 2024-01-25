@@ -1,7 +1,7 @@
 # <========== Imports ==========>
 
 from __future__ import annotations
-from tkinter import Frame, Tk
+from tkinter import Frame, PhotoImage, Tk
 
 # <========== Local Imports ==========>
 
@@ -32,7 +32,7 @@ class QuestionController:
         self.current_question_index: int = 0
 
         self.root: Tk = Tk()
-        self.root.title("Quiz Game")
+        self.root.iconphoto(False, PhotoImage(file="img/logo-favicon.png"))
 
         self.current_view: Frame | None  = None
         self.load_view()
