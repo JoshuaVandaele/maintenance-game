@@ -1,5 +1,3 @@
-"""Multiple choice question module."""
-
 # <========== Imports ==========>
 
 from __future__ import annotations

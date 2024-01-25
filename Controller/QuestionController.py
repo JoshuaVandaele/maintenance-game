@@ -1,17 +1,17 @@
-"""The question controller file for the program."""
 # <========== Imports ==========>
 
 from __future__ import annotations
-
 import os
-import random
 from pathlib import Path
-from tkinter import Frame, PhotoImage, TclError, Tk
+import random
+from tkinter import Frame, TclError, Tk, PhotoImage
 from urllib.parse import unquote
 
 import requests
 
-from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
+# <========== Local Imports ==========>
+
+# Model Imports
 from Model.Question import Question
 from Model.OpenQuestion import OpenQuestion
 from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
@@ -19,6 +19,10 @@ from Model.Score import Score
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
+from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
+
+# <========== Class ==========>
+
 
 class QuestionController:
     """Controller using to manage the questions.

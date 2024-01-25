@@ -1,29 +1,20 @@
-"""Multiple choice question field module."""
-
 # <========== Imports ==========>
 
 from __future__ import annotations
-
-from random import shuffle
-from tkinter import Button, Frame, Label, Radiobutton, StringVar
+from tkinter import Frame, Label, StringVar, Radiobutton, Button
 from typing import Callable
+from random import shuffle
 
 # <========== Class ==========>
 
-
 class MultipleChoiceQuestionField(Frame):
-    """Class representing a frame displaying a multiple choice question,
+    """ Class representing a frame displaying a multiple choice question,
     it contains a label, radio buttons (representing answer possibility) and a submit button.
     Derived from tkinter Frame.
     """
 
-    def __init__(
-        self: MultipleChoiceQuestionField,
-        label_text: str,
-        choices: list[str],
-        submit_func: Callable,
-    ) -> None:
-        """Constructor for a frame displaying a multiple choice question
+    def __init__(self: MultipleChoiceQuestionField, label_text: str, choices: list[str], submit_func: Callable) -> None:
+        """ Constructor for a frame displaying a multiple choice question
 
         Args:
             self (MultipleChoiceQuestionField): Self.
@@ -42,9 +33,7 @@ class MultipleChoiceQuestionField(Frame):
         self.submit_func: Callable = submit_func
 
         for i, choice in enumerate(choices):
-            radio_button: Radiobutton = Radiobutton(
-                self, text=choice, variable=self.radio_button_variable, value=choice
-            )
+            radio_button: Radiobutton = Radiobutton(self, text=choice, variable= self.radio_button_variable, value=choice)
             radio_button.grid(row=1, column=i)
             self.radio_buttons.append(radio_button)
 
@@ -52,7 +41,7 @@ class MultipleChoiceQuestionField(Frame):
         self.submit_button.grid(row=2, column=0, columnspan=len(choices))
 
     def submit(self: MultipleChoiceQuestionField) -> None:
-        """What to do when submit button is pressed.
+        """ What to do when submit button is pressed.
 
         Args:
             self (MultipleChoiceQuestionField): Self.
