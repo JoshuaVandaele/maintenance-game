@@ -37,6 +37,7 @@ class MainMenuController:
 
         self.root: Tk = Tk()
         self.root.title("Quiz Game")
+        self.root.geometry("600x350")
         self.root.configure(background="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")

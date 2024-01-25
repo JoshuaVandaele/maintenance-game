@@ -38,6 +38,9 @@ class QuestionController:
         self.wrong_answers: int = 0
 
         self.root: Tk = Tk()
+        self.root.title("Quiz Game")
+        self.root.geometry("600x400")
+        self.root.config(bg="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")
             self.root.iconphoto(False, PhotoImage(file=abs_path))
