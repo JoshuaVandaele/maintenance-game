@@ -36,7 +36,7 @@ class QuestionController:
             self (QuestionController): Self.
             questions (list[Question]): All Questions to display.
         """
-        $
+        self.score: Score = Score()
         self.questions: list[Question] = questions
         self.current_question_index: int = 0
         self.wrong_answers: int = 0
