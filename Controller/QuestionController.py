@@ -19,6 +19,7 @@ from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
 from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
+from View.EndPage import EndPage
 
 # <========== Class ==========>
 
@@ -100,7 +101,10 @@ class QuestionController:
             self (QuestionController): Self.
             answer (str | list[str]): Answer to check.
         """
-        if self.questions[self.current_question_index].check_answer(answer):
+        if self.it_is_end():
+            self.current_view=EndPage(lambda: print("push"), lambda: print("push"))
+            
+        elif self.questions[self.current_question_index].check_answer(answer):
             self.next_question()
 
     def next_question(self: QuestionController) -> None:
@@ -122,24 +126,28 @@ class QuestionController:
         Args:
             self (QuestionController): Self.
         """
-        if self.current_view:
-            self.current_view.pack_forget()
+        if self.it_is_end() :
+            self.current_view= EndPage(lambda: print("push"), lambda: print("push"))
+        else:   
+        
+            if self.current_view:
+                self.current_view.pack_forget()
 
-        if isinstance(self.questions[self.current_question_index], OpenQuestion):
-            self.current_view = OpenQuestionField(
-                label_text=self.questions[self.current_question_index].text,
-                submit_func=self.check_answer,
-            )
-        elif isinstance(
-            self.questions[self.current_question_index], MultipleChoiceQuestion
-        ):
-            self.current_view = MultipleChoiceQuestionField(
-                label_text=self.questions[self.current_question_index].text,
-                choices=self.questions[self.current_question_index].answer + self.questions[self.current_question_index].trap,  # type: ignore
-                submit_func=self.check_answer,
-            )
-        else:
-            self.current_view = Frame()
+            if isinstance(self.questions[self.current_question_index], OpenQuestion):
+                self.current_view = OpenQuestionField(
+                    label_text=self.questions[self.current_question_index].text,
+                    submit_func=self.check_answer,
+                )
+            elif isinstance(
+                self.questions[self.current_question_index], MultipleChoiceQuestion
+            ):
+                self.current_view = MultipleChoiceQuestionField(
+                    label_text=self.questions[self.current_question_index].text,
+                    choices=self.questions[self.current_question_index].answer + self.questions[self.current_question_index].trap,  # type: ignore
+                    submit_func=self.check_answer,
+                )
+            else:
+                self.current_view = Frame()
 
         self.current_view.pack(in_=self.root)
 
