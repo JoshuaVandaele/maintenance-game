@@ -4,8 +4,6 @@ import tkinter as tk
 
 from Controller.QuestionController import QuestionController
 from Controller.MainMenuController import MainMenuController
-from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
-from Model.OpenQuestion import OpenQuestion
 
 # <========== Main ==========>
 

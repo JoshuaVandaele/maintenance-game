@@ -1,7 +1,9 @@
 # <========== Imports ==========>
 
 from __future__ import annotations
-from tkinter import Frame, PhotoImage, Tk
+import os
+from pathlib import Path
+from tkinter import Frame, PhotoImage, TclError, Tk
 
 # <========== Local Imports ==========>
 
@@ -30,7 +32,11 @@ class MainMenuController:
 
         self.root: Tk = Tk()
         self.root.title("Quiz Game")
-        self.root.iconphoto(False, PhotoImage(file="img/logo-favicon.png"))
+        try:
+            abs_path = os.getcwd() / Path("img/logo-favicon.png")
+            self.root.iconphoto(False, PhotoImage(file=abs_path))
+        except TclError:
+            print("Warning: The favicon could not be loaded")
         self.views: Frame = WelcomePage(self.start, self.quit)
         self.views.pack()
 

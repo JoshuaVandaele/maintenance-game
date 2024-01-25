@@ -1,21 +1,24 @@
 # <========== Imports ==========>
 
 from __future__ import annotations
+import os
+from pathlib import Path
 import random
-from tkinter import Frame, Tk, PhotoImage
+from tkinter import Frame, TclError, Tk, PhotoImage
 from urllib.parse import unquote
 
 import requests
 
-from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
-from Model.OpenQuestion import OpenQuestion
+# <========== Local Imports ==========>
 
 # Model Imports
 from Model.Question import Question
-from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
+from Model.OpenQuestion import OpenQuestion
+from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
+from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 
 # <========== Class ==========>
 
@@ -32,11 +35,16 @@ class QuestionController:
             self (QuestionController): Self.
             questions (list[Question]): All Questions to display.
         """
+        print(os.getcwd())
         self.questions: list[Question] = questions
         self.current_question_index: int = 0
 
         self.root: Tk = Tk()
-        self.root.iconphoto(False, PhotoImage(file="img/logo-favicon.png"))
+        try:
+            abs_path = os.getcwd() / Path("img/logo-favicon.png")
+            self.root.iconphoto(False, PhotoImage(file=abs_path))
+        except TclError:
+            print("Warning: The favicon could not be loaded")
 
         self.current_view: Frame | None = None
         self.load_view()
