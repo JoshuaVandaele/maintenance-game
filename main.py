@@ -1,9 +1,10 @@
+"""The main file for the program."""
 # <========== Imports ==========>
 
 import tkinter as tk
 
-from Controller.QuestionController import QuestionController
 from Controller.MainMenuController import MainMenuController
+from Controller.QuestionController import QuestionController
 
 # <========== Main ==========>
 
