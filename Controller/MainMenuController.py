@@ -32,6 +32,7 @@ class MainMenuController:
 
         self.root: Tk = Tk()
         self.root.title("Quiz Game")
+        self.root.configure(background="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")
             self.root.iconphoto(False, PhotoImage(file=abs_path))
@@ -39,6 +40,8 @@ class MainMenuController:
             print("Warning: The favicon could not be loaded")
         self.views: Frame = WelcomePage(self.start, self.quit)
         self.views.pack()
+
+        self.root.resizable(False, False)
 
     def start(self: MainMenuController) -> QuestionController:
         """ Start the main menu.
