@@ -11,21 +11,14 @@ from urllib.parse import unquote
 
 import requests
 
-from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
-from Model.OpenQuestion import OpenQuestion
-
-# Model Imports
-from Model.Question import Question
 from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
+from Model.Question import Question
+from Model.OpenQuestion import OpenQuestion
+from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
+from Model.Score import Score
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
-
-# <========== Local Imports ==========>
-
-
-# <========== Class ==========>
-
 
 class QuestionController:
     """Controller using to manage the questions.
@@ -39,9 +32,10 @@ class QuestionController:
             self (QuestionController): Self.
             questions (list[Question]): All Questions to display.
         """
-        print(os.getcwd())
+        self.score: Score = Score()
         self.questions: list[Question] = questions
         self.current_question_index: int = 0
+        self.wrong_answers: int = 0
 
         self.root: Tk = Tk()
         try:
@@ -106,6 +100,10 @@ class QuestionController:
         """
         if self.questions[self.current_question_index].check_answer(answer):
             self.next_question()
+            self.score.increment(5, self.wrong_answers)
+            self.wrong_answers = 0
+        else:
+            self.wrong_answers += 1
 
     def next_question(self: QuestionController) -> None:
         """Go to the next question.
