@@ -18,20 +18,20 @@ class WelcomePage(Frame):
     def __init__(self: WelcomePage, start_func: Callable, leave_func: Callable) -> None:
         super().__init__()
 
-        self.image = PhotoImage(file="img/logo.png")
-        self.image_label = Label(self, image=self.image)
+        self.image: PhotoImage = PhotoImage(file="img/logo.png")
+        self.image_label: Label = Label(self, image=self.image)
+        self.image_label.configure(background="#383838")
         self.image_label.pack()
 
         self.start_func: Callable = start_func
-        self.start_button = Button(
-            self, text="Start the game", height=2, width=30, command=self.start
-        )
+          
+        self.start_button = Button(self, text="Start the game", height=2, width=30, command=self.start)
+        self.start_button.configure(background="#343434", fg="#ffffff")
         self.start_button.pack(pady=8)
 
         self.leave_func: Callable = leave_func
-        self.quit_button = Button(
-            self, text="Leave the game", height=2, width=30, command=self.leave
-        )
+        self.quit_button = Button(self, text="Leave the game", height=2, width=30, command=self.leave)
+        self.quit_button.configure(background="#343434", fg="#ffffff")
         self.quit_button.pack(pady=8)
 
     def start(self: WelcomePage) -> None:
