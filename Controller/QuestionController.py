@@ -1,28 +1,32 @@
 # <========== Imports ==========>
 
 from __future__ import annotations
-from tkinter import Frame, PhotoImage, Tk
+import random
+from tkinter import Frame, Tk, PhotoImage
+from urllib.parse import unquote
 
-# <========== Local Imports ==========>
+import requests
+
+from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
+from Model.OpenQuestion import OpenQuestion
 
 # Model Imports
 from Model.Question import Question
-from Model.OpenQuestion import OpenQuestion
-from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
+from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
-from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 
 # <========== Class ==========>
 
+
 class QuestionController:
-    """ Controller using to manage the questions.
+    """Controller using to manage the questions.
     Create a view for each question and check the answer.
     """
 
     def __init__(self: QuestionController, questions: list[Question]) -> None:
-        """ The constructor for QuestionController class.
+        """The constructor for QuestionController class.
 
         Args:
             self (QuestionController): Self.
@@ -34,11 +38,54 @@ class QuestionController:
         self.root: Tk = Tk()
         self.root.iconphoto(False, PhotoImage(file="img/logo-favicon.png"))
 
-        self.current_view: Frame | None  = None
+        self.current_view: Frame | None = None
         self.load_view()
 
+    @staticmethod
+    def generate_questions(amount: int) -> list[Question]:
+        """Generate questions from an API.
+        The API used is https://opentdb.com/.
+
+        Args:
+            amount (int): Amount of questions to generate.
+        """
+        questions: list[Question] = []
+        response = requests.get(
+            f"https://opentdb.com/api.php?amount={amount}&encode=url3986"
+        )
+        data = response.json()
+        for question in data["results"]:
+            isQuestionOpen: bool = False
+            if question["type"] == "multiple":
+                isQuestionOpen: bool = random.randint(0, 100) > 80
+
+            if isQuestionOpen:
+                questions.append(
+                    OpenQuestion(
+                        unquote(question["question"]),
+                        [
+                            correct_answer := unquote(question["correct_answer"]),
+                            correct_answer.lower(),
+                            correct_answer.upper(),
+                            correct_answer.capitalize(),
+                            correct_answer.title(),
+                            correct_answer.swapcase(),
+                            correct_answer.replace(" ", ""),
+                        ],
+                    )
+                )
+            else:
+                questions.append(
+                    MultipleChoiceQuestion(
+                        unquote(question["question"]),
+                        [unquote(question["correct_answer"])],
+                        [unquote(answer) for answer in question["incorrect_answers"]],
+                    )
+                )
+        return questions
+
     def check_answer(self: QuestionController, answer: str | list[str]) -> None:
-        """ Check if the answer is correct.
+        """Check if the answer is correct.
         if the answer is correct, go to the next question.
 
         Args:
@@ -49,7 +96,7 @@ class QuestionController:
             self.next_question()
 
     def next_question(self: QuestionController) -> None:
-        """ Go to the next question.
+        """Go to the next question.
         load the view of the next question.
 
         Args:
@@ -60,7 +107,7 @@ class QuestionController:
             self.load_view()
 
     def load_view(self: QuestionController) -> None:
-        """ Load the view of the current question.
+        """Load the view of the current question.
         The view change depending of the type of the question.
         The view is a tkinter Frame.s
 
@@ -73,13 +120,15 @@ class QuestionController:
         if isinstance(self.questions[self.current_question_index], OpenQuestion):
             self.current_view = OpenQuestionField(
                 label_text=self.questions[self.current_question_index].text,
-                submit_func=self.check_answer
+                submit_func=self.check_answer,
             )
-        elif isinstance(self.questions[self.current_question_index], MultipleChoiceQuestion):
+        elif isinstance(
+            self.questions[self.current_question_index], MultipleChoiceQuestion
+        ):
             self.current_view = MultipleChoiceQuestionField(
                 label_text=self.questions[self.current_question_index].text,
                 choices=self.questions[self.current_question_index].answer + self.questions[self.current_question_index].trap,  # type: ignore
-                submit_func=self.check_answer
+                submit_func=self.check_answer,
             )
         else:
             self.current_view = Frame()
@@ -87,7 +136,7 @@ class QuestionController:
         self.current_view.pack(in_=self.root)
 
     def it_is_end(self: QuestionController) -> bool:
-        """ Check if it is the end of the game.
+        """Check if it is the end of the game.
         if the index of the current question is equal to the length of the questions list, it is the end of the game.
 
         Args:
