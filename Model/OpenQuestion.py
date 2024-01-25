@@ -1,20 +1,24 @@
+"""Open Question Module"""
+
 # <========== Imports ==========>
 
 from __future__ import annotations
 
+from Model.Question import Question
+
 # <========== Local Imports ==========>
 
-from Model.Question import Question
 
 # <========== Class ==========>
 
+
 class OpenQuestion(Question):
-    """ Class representing a open question.
+    """Class representing a open question.
     Derived from abstract class Question.
     """
 
     def __init__(self: OpenQuestion, text: str, answer: list[str]) -> None:
-        """ Constructor for OpenQuestion class
+        """Constructor for OpenQuestion class
 
         Args:
             self (OpenQuestion): Self.
@@ -24,7 +28,7 @@ class OpenQuestion(Question):
         super().__init__(text, answer)
 
     def check_answer(self: OpenQuestion, answer: str) -> bool:
-        """ Checks if the answer is correct.
+        """Checks if the answer is correct.
 
         Args:
             answer (str | list[str]): Answer to check.
