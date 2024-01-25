@@ -55,10 +55,6 @@ class Application(tk.Tk):
         self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
         self.resizable(False, False)
 
-        background_image = tk.PhotoImage(file="fond.png")
-        background_label = tk.Label(self, image=background_image)
-        background_label.place(x=0, y=0, relwidth=1, relheight=1)
-
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
