@@ -17,13 +17,13 @@ Quiz game is a fun and entertaining quizz game that will make you discover new r
 
 ## Features
 
--Timer
--Question themes
--MCQ (Multiple choices questions)
--Free answer questions (case-unsensitive)
--Scoreboard
--API
--Questions stored in json
+- Timer
+- Question themes
+- MCQ (Multiple choices questions)
+- Free answer questions (case-unsensitive)
+- Scoreboard
+- API
+- Questions stored in json
 
 ## Installation
 
