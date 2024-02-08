@@ -124,6 +124,10 @@ class QuestionController:
         self.current_question_index += 1
         if not self.it_is_end():
             self.load_view()
+        else:
+            if self.current_view: self.current_view.pack_forget()
+            self.current_view = EndPage()
+            self.current_view.pack(in_=self.root)
 
     def load_view(self: QuestionController) -> None:
         """Load the view of the current question.
@@ -135,8 +139,6 @@ class QuestionController:
         """
         if self.current_view:
             self.current_view.pack_forget()
-        if self.it_is_end():
-            self.current_view = EndPage()
         else:
             if isinstance(self.questions[self.current_question_index], OpenQuestion):
                 self.current_view = OpenQuestionField(
