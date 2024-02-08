@@ -9,7 +9,7 @@ from Controller.MainMenuController import MainMenuController
 
 if __name__ == "__main__":
     # Create some questions
-    questions = QuestionController.generate_questions(10)
+    questions =[]
 
     controller = MainMenuController(questions)
     controller.root.mainloop()
