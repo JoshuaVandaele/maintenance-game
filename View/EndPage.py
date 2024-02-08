@@ -16,7 +16,7 @@ class EndPage(Frame):
         self.image = PhotoImage(file="img/logo.png")
         self.image_label = Label(self, image=self.image)
         self.image_label.pack()
-        self.text = Label(self, text="Bravo! Vous avez terminé cette partie", font=("Helvetica", 160))
+        self.text = Label(self, text="Bravo! Vous avez terminé cette partie", font=("Helvetica", 50))
         self.text.pack(anchor='center')
 
 
