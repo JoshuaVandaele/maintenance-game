@@ -42,7 +42,7 @@ class QuestionController:
 
         self.root: Tk = Tk()
         self.root.title("Quiz Game")
-        self.root.geometry("600x400")
+        self.root.configure(background="#383838")
         self.root.config(bg="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")
@@ -125,7 +125,8 @@ class QuestionController:
         if not self.it_is_end():
             self.load_view()
         else:
-            if self.current_view: self.current_view.pack_forget()
+            if self.current_view:
+                self.current_view.pack_forget()
             self.current_view = EndPage()
             self.current_view.pack(in_=self.root)
 
