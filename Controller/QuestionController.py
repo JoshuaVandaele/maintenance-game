@@ -1,4 +1,5 @@
 """The question controller file for the program."""
+
 # <========== Imports ==========>
 
 from __future__ import annotations
@@ -11,14 +12,16 @@ from urllib.parse import unquote
 
 import requests
 
-from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
-from Model.Question import Question
-from Model.OpenQuestion import OpenQuestion
 from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
+from Model.OpenQuestion import OpenQuestion
+from Model.Question import Question
 from Model.Score import Score
+from View.EndPage import EndPage
+from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
+
 
 class QuestionController:
     """Controller using to manage the questions.
@@ -39,7 +42,7 @@ class QuestionController:
 
         self.root: Tk = Tk()
         self.root.title("Quiz Game")
-        self.root.geometry("600x400")
+        self.root.configure(background="#383838")
         self.root.config(bg="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")
@@ -101,7 +104,10 @@ class QuestionController:
             self (QuestionController): Self.
             answer (str | list[str]): Answer to check.
         """
-        if self.questions[self.current_question_index].check_answer(answer):
+        if self.it_is_end():
+            self.current_view = EndPage()
+
+        elif self.questions[self.current_question_index].check_answer(answer):
             self.next_question()
             self.score.increment(5, self.wrong_answers)
             self.wrong_answers = 0
@@ -116,8 +122,14 @@ class QuestionController:
             self (QuestionController): Self.
         """
         self.current_question_index += 1
+
         if not self.it_is_end():
             self.load_view()
+        else:
+            if self.current_view:
+                self.current_view.pack_forget()
+            self.current_view = EndPage()
+            self.current_view.pack(in_=self.root)
 
     def load_view(self: QuestionController) -> None:
         """Load the view of the current question.
