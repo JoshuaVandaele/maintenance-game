@@ -1,28 +1,26 @@
+"""The question controller file for the program."""
 # <========== Imports ==========>
 
 from __future__ import annotations
+
 import os
-from pathlib import Path
 import random
-from tkinter import Frame, TclError, Tk, PhotoImage
+from pathlib import Path
+from tkinter import Frame, PhotoImage, TclError, Tk
 from urllib.parse import unquote
 
 import requests
 
-# <========== Local Imports ==========>
-
-# Model Imports
+from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 from Model.Question import Question
 from Model.OpenQuestion import OpenQuestion
 from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
+from Model.Score import Score
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
 from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 from View.EndPage import EndPage
-
-# <========== Class ==========>
-
 
 class QuestionController:
     """Controller using to manage the questions.
@@ -36,11 +34,15 @@ class QuestionController:
             self (QuestionController): Self.
             questions (list[Question]): All Questions to display.
         """
-        print(os.getcwd())
+        self.score: Score = Score()
         self.questions: list[Question] = questions
         self.current_question_index: int = 0
+        self.wrong_answers: int = 0
 
         self.root: Tk = Tk()
+        self.root.title("Quiz Game")
+        self.root.geometry("600x400")
+        self.root.config(bg="#383838")
         try:
             abs_path = os.getcwd() / Path("img/logo-favicon.png")
             self.root.iconphoto(False, PhotoImage(file=abs_path))
@@ -106,6 +108,10 @@ class QuestionController:
             
         elif self.questions[self.current_question_index].check_answer(answer):
             self.next_question()
+            self.score.increment(5, self.wrong_answers)
+            self.wrong_answers = 0
+        else:
+            self.wrong_answers += 1
 
     def next_question(self: QuestionController) -> None:
         """Go to the next question.
