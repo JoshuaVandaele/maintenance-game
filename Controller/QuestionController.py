@@ -122,6 +122,7 @@ class QuestionController:
             self (QuestionController): Self.
         """
         self.current_question_index += 1
+
         if not self.it_is_end():
             self.load_view()
         else:
@@ -140,22 +141,22 @@ class QuestionController:
         """
         if self.current_view:
             self.current_view.pack_forget()
+
+        if isinstance(self.questions[self.current_question_index], OpenQuestion):
+            self.current_view = OpenQuestionField(
+                label_text=self.questions[self.current_question_index].text,
+                submit_func=self.check_answer,
+            )
+        elif isinstance(
+            self.questions[self.current_question_index], MultipleChoiceQuestion
+        ):
+            self.current_view = MultipleChoiceQuestionField(
+                label_text=self.questions[self.current_question_index].text,
+                choices=self.questions[self.current_question_index].answer + self.questions[self.current_question_index].trap,  # type: ignore
+                submit_func=self.check_answer,
+            )
         else:
-            if isinstance(self.questions[self.current_question_index], OpenQuestion):
-                self.current_view = OpenQuestionField(
-                    label_text=self.questions[self.current_question_index].text,
-                    submit_func=self.check_answer,
-                )
-            elif isinstance(
-                self.questions[self.current_question_index], MultipleChoiceQuestion
-            ):
-                self.current_view = MultipleChoiceQuestionField(
-                    label_text=self.questions[self.current_question_index].text,
-                    choices=self.questions[self.current_question_index].answer + self.questions[self.current_question_index].trap,  # type: ignore
-                    submit_func=self.check_answer,
-                )
-            else:
-                self.current_view = Frame()
+            self.current_view = Frame()
 
         self.current_view.pack(in_=self.root)
 
