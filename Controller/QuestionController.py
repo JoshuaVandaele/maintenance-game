@@ -1,4 +1,5 @@
 """The question controller file for the program."""
+
 # <========== Imports ==========>
 
 from __future__ import annotations
@@ -11,16 +12,16 @@ from urllib.parse import unquote
 
 import requests
 
-from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
-from Model.Question import Question
-from Model.OpenQuestion import OpenQuestion
 from Model.MultipleChoiceQuestion import MultipleChoiceQuestion
+from Model.OpenQuestion import OpenQuestion
+from Model.Question import Question
 from Model.Score import Score
+from View.EndPage import EndPage
+from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
 
 # View Imports
 from View.OpenQuestionField import OpenQuestionField
-from View.MultipleChoiceQuestionField import MultipleChoiceQuestionField
-from View.EndPage import EndPage
+
 
 class QuestionController:
     """Controller using to manage the questions.
@@ -104,8 +105,8 @@ class QuestionController:
             answer (str | list[str]): Answer to check.
         """
         if self.it_is_end():
-            self.current_view=EndPage(lambda: print("push"), lambda: print("push"))
-            
+            self.current_view = EndPage()
+
         elif self.questions[self.current_question_index].check_answer(answer):
             self.next_question()
             self.score.increment(5, self.wrong_answers)
@@ -132,13 +133,11 @@ class QuestionController:
         Args:
             self (QuestionController): Self.
         """
-        if self.it_is_end() :
-            self.current_view= EndPage(lambda: print("push"), lambda: print("push"))
-        else:   
-        
-            if self.current_view:
-                self.current_view.pack_forget()
-
+        if self.current_view:
+            self.current_view.pack_forget()
+        if self.it_is_end():
+            self.current_view = EndPage()
+        else:
             if isinstance(self.questions[self.current_question_index], OpenQuestion):
                 self.current_view = OpenQuestionField(
                     label_text=self.questions[self.current_question_index].text,
